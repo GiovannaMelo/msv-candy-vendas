@@ -1,7 +1,9 @@
 package br.com.candyhouse.msvcandyvendas.controller;
 
 import br.com.candyhouse.msvcandyvendas.dto.ItemDto;
+import br.com.candyhouse.msvcandyvendas.dto.ProdutosDisponiveisDto;
 import br.com.candyhouse.msvcandyvendas.entity.Item;
+import br.com.candyhouse.msvcandyvendas.service.ApiCandyProducaoService;
 import br.com.candyhouse.msvcandyvendas.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,9 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private ApiCandyProducaoService apiCandyProducao;
 
     @GetMapping
     public ResponseEntity<List<ItemDto>> listarItens(){
@@ -40,6 +45,11 @@ public class ItemController {
     @PutMapping("{id}")
     public ResponseEntity<ItemDto> modificarItem(@PathVariable Integer id, @RequestBody ItemDto item){
         return ResponseEntity.ok(itemService.modificarItem(id, item));
+    }
+
+    @GetMapping("/produtos")
+    public ResponseEntity<List<ProdutosDisponiveisDto>> listarProdutos(){
+       return ResponseEntity.ok(apiCandyProducao.listarProdutos());
     }
 
 }

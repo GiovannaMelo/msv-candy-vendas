@@ -1,7 +1,10 @@
 package br.com.candyhouse.msvcandyvendas.mapper;
 
+import br.com.candyhouse.msvcandyvendas.dto.ItemDto;
 import br.com.candyhouse.msvcandyvendas.dto.TransacaoDto;
+import br.com.candyhouse.msvcandyvendas.entity.Item;
 import br.com.candyhouse.msvcandyvendas.entity.Transacao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +12,9 @@ import java.util.List;
 
 @Component
 public class TransacaoMapper {
+
+    @Autowired
+    private ItemMapper itemMapper;
 
     public TransacaoDto converterEntidadeParaDto(Transacao transacao) {
         return new TransacaoDto(transacao.getIdTransacao(), transacao.getValorFabricacao(), transacao.getDataTransacao(), transacao.getFkItem());
@@ -28,6 +34,7 @@ public class TransacaoMapper {
             transacaoDto.setValorFabricacao(valor.getValorFabricacao());
             transacaoDto.setDataTransacao(valor.getDataTransacao());
             transacaoDto.setFkItem(valor.getFkItem());
+            listaTransacaoDto.add(transacaoDto);
         }
         return listaTransacaoDto;
     }

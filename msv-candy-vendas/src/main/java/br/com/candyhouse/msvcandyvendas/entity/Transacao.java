@@ -1,11 +1,13 @@
 package br.com.candyhouse.msvcandyvendas.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -23,8 +25,9 @@ public class Transacao {
     @Column(name = "valor_fabricacao")
     private Double valorFabricacao;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_transacao")
-    private Date dataTransacao;
+    private LocalDate dataTransacao;
 
     @ManyToOne
     @JoinColumn(name = "fk_item")
